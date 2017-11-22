@@ -18,23 +18,7 @@ class Member: NSObject, NSCoding {
         self.sex = sex
         self.detail = detail
     }
-//    init?(coder aDecoder: NSCoder) {
-//        <#code#>
-//    }
-//    init(coder decoder: NSCoder) {
-//        self.name = decoder.decodeObject(forKey: "name") as! String
-//        self.age = decoder.decodeObject(forKey: "age") as! Int
-//        self.sex = decoder.decodeObject(forKey: "age") as! String
-//        self.init{
-//            name : name;
-//            age : age;
-//            sex : se
-//        }
-//    }
-//
-//    func encode(with coder: NSCoder) {
-////        coder.encode(<#T##data: Data##Data#>)
-//    }
+
     required init(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.age = aDecoder.decodeInteger(forKey: "age")

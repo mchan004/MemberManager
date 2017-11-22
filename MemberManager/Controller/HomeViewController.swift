@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeViewController: UIViewController {
     
@@ -28,13 +29,31 @@ class HomeViewController: UIViewController {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         
-//        if defaults.object(forKey: "Members") != nil {
-////            Save.members = defaults.object(forKey: "Members") as! [Member]
-//
+        //UserDefaults
+//        if let data = defaults.data(forKey: "Members"), let members = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Member] {
+//            Save.members = members
 //        }
         
-        if let data = defaults.data(forKey: "Members"), let members = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Member] {
-            Save.members = members
+        //Core data
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Members")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    if let name = result.value(forKey: "name"), let age = result.value(forKey: "age"), let sex = result.value(forKey: "sex"), let detail = result.value(forKey: "detail") {
+                        let m = Member(name: name as! String, age: age as! Int, sex: sex as! String, detail: detail as! String)
+                        Save.members.append(m)
+                    }
+                }
+            }
+        } catch {
+            print("Error")
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView(_:)), name: Notification.Name.init(rawValue: "AddMember"), object: nil)

@@ -10,6 +10,7 @@
 		C318FE011FC3B6510003FF39 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318FE001FC3B6510003FF39 /* MemberTableViewCell.swift */; };
 		C318FE041FC3C42A0003FF39 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318FE031FC3C42A0003FF39 /* Member.swift */; };
 		C318FE071FC3DB220003FF39 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318FE061FC3DB220003FF39 /* Helper.swift */; };
+		C389BE351FC5650A0013A272 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C389BE331FC5650A0013A272 /* Database.xcdatamodeld */; };
 		C3E8EBF51FC2D34B00EBAEA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EBF41FC2D34B00EBAEA6 /* AppDelegate.swift */; };
 		C3E8EBF71FC2D34B00EBAEA6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EBF61FC2D34B00EBAEA6 /* LoginViewController.swift */; };
 		C3E8EBFA1FC2D34B00EBAEA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3E8EBF81FC2D34B00EBAEA6 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		C318FE001FC3B6510003FF39 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		C318FE031FC3C42A0003FF39 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		C318FE061FC3DB220003FF39 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C389BE341FC5650A0013A272 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		C3E8EBF11FC2D34B00EBAEA6 /* MemberManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemberManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3E8EBF41FC2D34B00EBAEA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3E8EBF61FC2D34B00EBAEA6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				C318FE031FC3C42A0003FF39 /* Member.swift */,
+				C389BE331FC5650A0013A272 /* Database.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			files = (
 				C318FE011FC3B6510003FF39 /* MemberTableViewCell.swift in Sources */,
 				C318FE071FC3DB220003FF39 /* Helper.swift in Sources */,
+				C389BE351FC5650A0013A272 /* Database.xcdatamodeld in Sources */,
 				C318FE041FC3C42A0003FF39 /* Member.swift in Sources */,
 				C3E8EBF71FC2D34B00EBAEA6 /* LoginViewController.swift in Sources */,
 				C3E8EBF51FC2D34B00EBAEA6 /* AppDelegate.swift in Sources */,
@@ -614,6 +618,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C389BE331FC5650A0013A272 /* Database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C389BE341FC5650A0013A272 /* Database.xcdatamodel */,
+			);
+			currentVersion = C389BE341FC5650A0013A272 /* Database.xcdatamodel */;
+			path = Database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C3E8EBE91FC2D34B00EBAEA6 /* Project object */;
 }

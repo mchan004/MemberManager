@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddViewController: UIViewController {
     
@@ -68,9 +69,31 @@ class AddViewController: UIViewController {
         let member = Member(name: name, age: age, sex: sex, detail: detail)
         Save.members.append(member)
         
+        //Userdefaults
         let defaults = UserDefaults.standard
         let encodeData = NSKeyedArchiver.archivedData(withRootObject: Save.members)
         defaults.set(encodeData, forKey: "Members")
+        
+        //Core Data
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let newMember = NSEntityDescription.insertNewObject(forEntityName: "Members", into: context)
+        
+        newMember.setValue(age, forKey: "age")
+        newMember.setValue(detail, forKey: "detail")
+        newMember.setValue(name, forKey: "name")
+        newMember.setValue(sex, forKey: "sex")
+        
+        do {
+            try context.save()
+            print(123)
+        } catch  {
+            
+        }
+        
+        
+        
+        
         NotificationCenter.default.post(name: Notification.Name.init("AddMember"), object: nil)
         _ = navigationController?.popViewController(animated: true)
     }
@@ -101,6 +124,8 @@ class AddViewController: UIViewController {
         
         view.addGestureRecognizer(tap)
         viewTextF.addGestureRecognizer(tap)
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
