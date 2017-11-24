@@ -20,6 +20,8 @@
 		C3E8EC151FC2D34B00EBAEA6 /* MemberManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EC141FC2D34B00EBAEA6 /* MemberManagerUITests.swift */; };
 		C3E8EC241FC2DDCC00EBAEA6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EC231FC2DDCC00EBAEA6 /* HomeViewController.swift */; };
 		C3E8EC261FC2DDFC00EBAEA6 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */; };
+		C3FCFC7F1FC7BAED005699E9 /* ContainerSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFC7E1FC7BAED005699E9 /* ContainerSideMenuViewController.swift */; };
+		C3FCFC821FC7D1E8005699E9 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFC811FC7D1E8005699E9 /* SideMenuTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		C3E8EC161FC2D34B00EBAEA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3E8EC231FC2DDCC00EBAEA6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		C3FCFC7E1FC7BAED005699E9 /* ContainerSideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerSideMenuViewController.swift; sourceTree = "<group>"; };
+		C3FCFC811FC7D1E8005699E9 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +93,9 @@
 		C318FDFE1FC3B5DA0003FF39 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C3FCFC801FC7BDAA005699E9 /* Cell */,
+				C3FCFC7D1FC7BAA1005699E9 /* SideMenu */,
 				C3E8EBF81FC2D34B00EBAEA6 /* Main.storyboard */,
-				C318FE001FC3B6510003FF39 /* MemberTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,6 +186,23 @@
 				C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C3FCFC7D1FC7BAA1005699E9 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C3FCFC7E1FC7BAED005699E9 /* ContainerSideMenuViewController.swift */,
+				C3FCFC811FC7D1E8005699E9 /* SideMenuTableViewController.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		C3FCFC801FC7BDAA005699E9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C318FE001FC3B6510003FF39 /* MemberTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,12 +341,14 @@
 			files = (
 				C318FE011FC3B6510003FF39 /* MemberTableViewCell.swift in Sources */,
 				C318FE071FC3DB220003FF39 /* Helper.swift in Sources */,
+				C3FCFC7F1FC7BAED005699E9 /* ContainerSideMenuViewController.swift in Sources */,
 				C389BE351FC5650A0013A272 /* Database.xcdatamodeld in Sources */,
 				C318FE041FC3C42A0003FF39 /* Member.swift in Sources */,
 				C3E8EBF71FC2D34B00EBAEA6 /* LoginViewController.swift in Sources */,
 				C3E8EBF51FC2D34B00EBAEA6 /* AppDelegate.swift in Sources */,
 				C3E8EC261FC2DDFC00EBAEA6 /* AddViewController.swift in Sources */,
 				C3E8EC241FC2DDCC00EBAEA6 /* HomeViewController.swift in Sources */,
+				C3FCFC821FC7D1E8005699E9 /* SideMenuTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,12 +514,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M37C2L4H2B;
 				INFOPLIST_FILE = MemberManager/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ThanhTu.MemberManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -505,12 +532,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M37C2L4H2B;
 				INFOPLIST_FILE = MemberManager/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ThanhTu.MemberManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

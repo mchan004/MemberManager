@@ -16,7 +16,7 @@ class MemberTableViewCell: UITableViewCell {
     
     
     
-    var member: Member? {
+    var member: Members? {
         didSet {
             if let name = member?.name {
                 labelName.text = name

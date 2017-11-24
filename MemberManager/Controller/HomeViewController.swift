@@ -13,74 +13,104 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     let defaults = UserDefaults.standard
+    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    @IBAction func handleLogout(_ sender: Any) {
-        defaults.removeObject(forKey: "user")
-        _ = navigationController?.popToRootViewController(animated: true)
+    @IBAction func ToggleSideMenu(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
+        print("ToggleSideMenu")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         
+        notificationCenter()
+        
+        
     }
+    
+    
     
     func setupTableView() {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.allowsMultipleSelectionDuringEditing = true
         
         //UserDefaults
 //        if let data = defaults.data(forKey: "Members"), let members = NSKeyedUnarchiver.unarchiveObject(with: data) as? [Member] {
 //            Save.members = members
 //        }
         
-        //Core data
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
+        /////////////
+        //Core data//
+        /////////////
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Members")
         request.returnsObjectsAsFaults = false
         
         do {
-            let results = try context.fetch(request)
-            
-            if results.count > 0 {
-                for result in results as! [NSManagedObject] {
-                    if let name = result.value(forKey: "name"), let age = result.value(forKey: "age"), let sex = result.value(forKey: "sex"), let detail = result.value(forKey: "detail") {
-                        let m = Member(name: name as! String, age: age as! Int, sex: sex as! String, detail: detail as! String)
-                        Save.members.append(m)
-                    }
-                }
-            }
+            Save.membersCoreData = try context.fetch(Members.fetchRequest())
         } catch {
             print("Error")
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView(_:)), name: Notification.Name.init(rawValue: "AddMember"), object: nil)
+        
+        
     }
     
+    
+    
+    //////////////////////
+    //NotificationCenter//
+    //////////////////////
+    func notificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView(_:)), name: Notification.Name.init(rawValue: "AddMember"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLogout), name: NSNotification.Name("Logout"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAddMember), name: NSNotification.Name("ShowAddMember"), object: nil)
+    }
+    
+    @objc func handleLogout() {
+        defaults.removeObject(forKey: "user")
+        performSegue(withIdentifier: "Logout", sender: nil)
+    }
+    
+    @objc func showAddMember() {
+        performSegue(withIdentifier: "AddMember", sender: nil)
+    }
+    
+    
+    /////////////////////
     @objc func reloadTableView(_ notification: Notification) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        
+        tableView.reloadData()
     }
     
 }
 
 
-
-
-extension HomeViewController: UITableViewDataSource {
+/////////////
+//TableView//
+/////////////
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Save.members.count
+        return Save.membersCoreData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MemberTableViewCell
-        cell.member = Save.members[indexPath.row]
+        cell.member = Save.membersCoreData[indexPath.row]
         return cell
     }
     
-    
+    //////////
+    //Delete//
+    //////////
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let mem = Save.membersCoreData[indexPath.row]
+            context.delete(mem)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            Save.membersCoreData.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
 }

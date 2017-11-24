@@ -26,6 +26,7 @@ class AddViewController: UIViewController {
     var select: Bool = true
     var dataPickerView: [String] = []
     var members: [Member] = []
+    var isTextView: Bool = false
     
     @IBAction func handleOkPickerView(_ sender: Any) {
         viewPickerView.isHidden = true
@@ -45,6 +46,24 @@ class AddViewController: UIViewController {
         viewPickerView.isHidden = true
     }
     
+    @IBAction func handleTouchDownAge(_ sender: Any) {
+        viewPickerView.isHidden = false
+        view.endEditing(true)
+        select = false
+        dataPickerView = []
+        for i in 11...60 {
+            dataPickerView.append(String(i))
+        }
+        pickerView.reloadAllComponents()
+    }
+    
+    @IBAction func handleTouchDownSex(_ sender: Any) {
+        viewPickerView.isHidden = false
+        view.endEditing(true)
+        select = true
+        dataPickerView = ["Famale", "Male"]
+        pickerView.reloadAllComponents()
+    }
     
     @IBAction func handleAdd(_ sender: Any) {
         let name = textName.text!
@@ -69,10 +88,10 @@ class AddViewController: UIViewController {
         let member = Member(name: name, age: age, sex: sex, detail: detail)
         Save.members.append(member)
         
-        //Userdefaults
-        let defaults = UserDefaults.standard
-        let encodeData = NSKeyedArchiver.archivedData(withRootObject: Save.members)
-        defaults.set(encodeData, forKey: "Members")
+//        //Userdefaults
+//        let defaults = UserDefaults.standard
+//        let encodeData = NSKeyedArchiver.archivedData(withRootObject: Save.members)
+//        defaults.set(encodeData, forKey: "Members")
         
         //Core Data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -83,7 +102,7 @@ class AddViewController: UIViewController {
         newMember.setValue(detail, forKey: "detail")
         newMember.setValue(name, forKey: "name")
         newMember.setValue(sex, forKey: "sex")
-        
+        Save.membersCoreData.append(newMember as! Members)
         do {
             try context.save()
             print(123)
@@ -92,11 +111,10 @@ class AddViewController: UIViewController {
         }
         
         
-        
-        
         NotificationCenter.default.post(name: Notification.Name.init("AddMember"), object: nil)
         _ = navigationController?.popViewController(animated: true)
     }
+    
     
     
     
@@ -125,39 +143,58 @@ class AddViewController: UIViewController {
         view.addGestureRecognizer(tap)
         viewTextF.addGestureRecognizer(tap)
         
-        
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     @objc func dismissKeyboard()
     {
+        viewPickerView.isHidden = true
         view.endEditing(true)
     }
     
+    
     @objc func keyboardWillShow(_ notification: Notification) {
+        viewPickerView.isHidden = true
+        if !isTextView {
+            return
+        }
+        
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
+
+            let viewHeight = view.frame.size.height
+            let viewWidth = view.frame.size.width
             
-            heightViewConstraint.constant += keyboardHeight
+            
+            let keyboardY = viewHeight - keyboardHeight
+            
+            let textDetailY = textDetail.frame.origin.y
+            
+            if view.frame.origin.y >= 0 {
+                //Checking if the text is really hidden behind the keyboard
+                if textDetailY > keyboardY - 70 {
+                    UIView.animate(withDuration: 1, animations: {
+                        self.view.frame = CGRect(x: 0, y: 0 - (textDetailY - (keyboardY - 70)), width: viewWidth, height: viewHeight)
+                    })
+                }
+            }
+            isTextView = false
         }
-        
-//        let bottomOffset = CGPoint(x: 0, y: scrollView.bounds.size.height - scrollView.contentSize.height)
-//        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            
-            heightViewConstraint.constant -= keyboardHeight
-        }
         
+        self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
     }
-    /////////////////////
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    /////////Function////////////
     func showAlert(title: String?, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Let me check again", style: UIAlertActionStyle.default, handler: nil))
@@ -195,24 +232,15 @@ extension AddViewController: UIPickerViewDelegate {
 //TextField//
 /////////////
 extension AddViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        viewPickerView.isHidden = false
-        dismissKeyboard()
-        if textField == textAge {
-            select = false
-            dataPickerView = []
-            for i in 11...60 {
-                dataPickerView.append(String(i))
-            }
-        } else {
-            select = true
-            dataPickerView = ["Famale", "Male"]
-        }
-        DispatchQueue.main.async {
-            self.pickerView.reloadAllComponents()
-        }
-        
-    }
-    
 
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
+    }
+}
+
+extension AddViewController: UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        isTextView = true
+        return true
+    }
 }
