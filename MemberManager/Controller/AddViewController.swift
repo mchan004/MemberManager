@@ -78,7 +78,11 @@ class AddViewController: UIViewController {
             return
         }
         
-        if Int(textSex.text!)! < 5 || Int(textSex.text!)! > 100 {
+        guard let age = Int(textAge.text!) else {
+            return
+        }
+        
+        if age < 5 || age > 100 {
             self.showAlert(title: "Nhap tuoi sai!", message: nil)
             return
         }
@@ -89,9 +93,7 @@ class AddViewController: UIViewController {
         }
         
         let sex = textSex.text!
-        guard let age = Int(textAge.text!) else {
-            return
-        }
+        
         
         
         let member = Member(name: name, age: age, sex: sex, detail: detail)
@@ -147,9 +149,7 @@ class AddViewController: UIViewController {
     //Keyboard//
     ////////////
     func setupKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         
         view.addGestureRecognizer(tap)
         viewTextF.addGestureRecognizer(tap)

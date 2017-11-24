@@ -105,7 +105,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msD-L2-hvN">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msD-L2-hvN">
                                                     <rect key="frame" x="15" y="53" width="290" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -178,7 +178,7 @@
             </objects>
             <point key="canvasLocation" x="2306" y="-476"/>
         </scene>
-        <!--Add View Controller-->
+        <!--Add new member-->
         <scene sceneID="CYy-8q-XcG">
             <objects>
                 <viewController id="flF-DS-uKI" customClass="AddViewController" customModule="MemberManager" customModuleProvider="target" sceneMemberID="viewController">
@@ -351,7 +351,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Iqy-Th-i2k"/>
                     </view>
-                    <navigationItem key="navigationItem" id="IfP-OB-atk">
+                    <navigationItem key="navigationItem" title="Add new member" id="IfP-OB-atk">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="bBS-9Q-2wv">
                             <connections>
                                 <action selector="handleAdd:" destination="flF-DS-uKI" id="VWK-PU-kEn"/>
