@@ -113,4 +113,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadData()
         }
     }
+    
+    ////////////
+    //Selected//
+    ////////////
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UserDefaults.standard.set(indexPath.row, forKey: "tableviewSelected")
+    }
 }

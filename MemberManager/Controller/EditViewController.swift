@@ -2,14 +2,14 @@
 //  AddViewController.swift
 //  MemberManager
 //
-//  Created by Administrator on 11/20/17.
+//  Created by Administrator on 11/24/17.
 //  Copyright © 2017 Administrator. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class AddViewController: UIViewController {
+class EditViewController: UIViewController {
     
     @IBOutlet weak var textName: UITextField!
     @IBOutlet weak var textDetail: UITextView!
@@ -27,6 +27,33 @@ class AddViewController: UIViewController {
     var dataPickerView: [String] = []
     var members: [Member] = []
     var isTextView: Bool = false
+    var idSelected: Int!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        setupDataView()
+        
+        setupKeyboard()
+        
+    }
+    
+    func setupView() {
+        textDetail.layer.cornerRadius = 6
+        textDetail.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        textDetail.layer.borderWidth = 1
+        
+        viewPickerView.isHidden = true
+    }
+    
+    func setupDataView() {
+        idSelected = UserDefaults.standard.object(forKey: "tableviewSelected") as! Int
+//        member = Save.membersCoreData[idSelected]
+        textName.text = Save.membersCoreData[idSelected].name
+        textAge.text = String(Save.membersCoreData[idSelected].age)
+        textSex.text = Save.membersCoreData[idSelected].sex
+        textDetail.text = Save.membersCoreData[idSelected].detail
+    }
     
     @IBAction func handleOkPickerView(_ sender: Any) {
         viewPickerView.isHidden = true
@@ -65,7 +92,7 @@ class AddViewController: UIViewController {
         pickerView.reloadAllComponents()
     }
     
-    @IBAction func handleAdd(_ sender: Any) {
+    @IBAction func handleSave(_ sender: Any) {
         let name = textName.text!
         let detail = textDetail.text!
         if name.count < 4 || name.count > 20 {
@@ -78,7 +105,11 @@ class AddViewController: UIViewController {
             return
         }
         
-        if Int(textSex.text!)! < 5 || Int(textSex.text!)! > 100 {
+        guard let age = Int(textAge.text!) else {
+            return
+        }
+        
+        if age < 5 || age > 100 {
             self.showAlert(title: "Nhap tuoi sai!", message: nil)
             return
         }
@@ -89,31 +120,26 @@ class AddViewController: UIViewController {
         }
         
         let sex = textSex.text!
-        guard let age = Int(textAge.text!) else {
-            return
-        }
+        
         
         
         let member = Member(name: name, age: age, sex: sex, detail: detail)
         Save.members.append(member)
         
-//        //Userdefaults
-//        let defaults = UserDefaults.standard
-//        let encodeData = NSKeyedArchiver.archivedData(withRootObject: Save.members)
-//        defaults.set(encodeData, forKey: "Members")
+        //        //Userdefaults
+        //        let defaults = UserDefaults.standard
+        //        let encodeData = NSKeyedArchiver.archivedData(withRootObject: Save.members)
+        //        defaults.set(encodeData, forKey: "Members")
         
-        /////////////
-        //Core Data//
-        /////////////
+        //Core Data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
-        let newMember = NSEntityDescription.insertNewObject(forEntityName: "Members", into: context)
         
-        newMember.setValue(age, forKey: "age")
-        newMember.setValue(detail, forKey: "detail")
-        newMember.setValue(name, forKey: "name")
-        newMember.setValue(sex, forKey: "sex")
-        Save.membersCoreData.append(newMember as! Members)
+        Save.membersCoreData[idSelected].age = Int16(age)
+        Save.membersCoreData[idSelected].detail = detail
+        Save.membersCoreData[idSelected].sex = sex
+        Save.membersCoreData[idSelected].name = name
+        
         do {
             try context.save()
             print(123)
@@ -128,20 +154,6 @@ class AddViewController: UIViewController {
     
     
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-        setupKeyboard()
-    }
-    
-    func setupView() {
-        textDetail.layer.cornerRadius = 6
-        textDetail.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        textDetail.layer.borderWidth = 1
-        
-        viewPickerView.isHidden = true
-    }
     
     ////////////
     //Keyboard//
@@ -174,7 +186,7 @@ class AddViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-
+            
             let viewHeight = view.frame.size.height
             let viewWidth = view.frame.size.width
             
@@ -217,7 +229,7 @@ class AddViewController: UIViewController {
 //////////////
 //PickerView//
 //////////////
-extension AddViewController: UIPickerViewDataSource {
+extension EditViewController: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -230,28 +242,29 @@ extension AddViewController: UIPickerViewDataSource {
     
 }
 
-extension AddViewController: UIPickerViewDelegate {
+extension EditViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return dataPickerView[row]
         
     }
     
-
+    
 }
 
 /////////////
 //TextField//
 /////////////
-extension AddViewController: UITextFieldDelegate {
-
+extension EditViewController: UITextFieldDelegate {
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
 }
 
-extension AddViewController: UITextViewDelegate {
+extension EditViewController: UITextViewDelegate {
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         isTextView = true
         return true
     }
 }
+

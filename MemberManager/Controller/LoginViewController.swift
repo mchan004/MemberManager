@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var textUserName: UITextField!
     @IBOutlet weak var textPassword: UITextField!
+    let defaults = UserDefaults.standard
     
     @IBAction func handleLogin(_ sender: Any) {
         let user = textUserName.text!
@@ -27,14 +28,13 @@ class LoginViewController: UIViewController {
         }
         
         
-        let defaults = UserDefaults.standard
         defaults.set(user, forKey: "user")
         performSegue(withIdentifier: "login", sender: nil)
         
     }
     
     
-    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if defaults.object(forKey: "user") != nil {

@@ -12,4 +12,5 @@ class Save {
     static var members: [Member] = []
     
     static var membersCoreData: [Members] = []
+    
 }

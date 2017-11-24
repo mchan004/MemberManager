@@ -22,6 +22,7 @@
 		C3E8EC261FC2DDFC00EBAEA6 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */; };
 		C3FCFC7F1FC7BAED005699E9 /* ContainerSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFC7E1FC7BAED005699E9 /* ContainerSideMenuViewController.swift */; };
 		C3FCFC821FC7D1E8005699E9 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFC811FC7D1E8005699E9 /* SideMenuTableViewController.swift */; };
+		C3FCFC841FC7F1BD005699E9 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFC831FC7F1BD005699E9 /* EditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C3FCFC7E1FC7BAED005699E9 /* ContainerSideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerSideMenuViewController.swift; sourceTree = "<group>"; };
 		C3FCFC811FC7D1E8005699E9 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
+		C3FCFC831FC7F1BD005699E9 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				C3E8EBF61FC2D34B00EBAEA6 /* LoginViewController.swift */,
 				C3E8EC231FC2DDCC00EBAEA6 /* HomeViewController.swift */,
 				C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */,
+				C3FCFC831FC7F1BD005699E9 /* EditViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				C3E8EBF51FC2D34B00EBAEA6 /* AppDelegate.swift in Sources */,
 				C3E8EC261FC2DDFC00EBAEA6 /* AddViewController.swift in Sources */,
 				C3E8EC241FC2DDCC00EBAEA6 /* HomeViewController.swift in Sources */,
+				C3FCFC841FC7F1BD005699E9 /* EditViewController.swift in Sources */,
 				C3FCFC821FC7D1E8005699E9 /* SideMenuTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
