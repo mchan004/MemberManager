@@ -13,7 +13,7 @@ class MemberTableViewCell: UITableViewCell {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelAgeSex: UILabel!
     @IBOutlet weak var labelDetail: UILabel!
-    
+    @IBOutlet weak var imageAvatar: UIImageView!
     
     
     var member: Members? {
@@ -27,12 +27,20 @@ class MemberTableViewCell: UITableViewCell {
             if let detail = member?.detail {
                 labelDetail.text = detail
             }
+            
+            if let imageData = member?.avatar {
+                if let image = UIImage(data:imageData) {
+                    imageAvatar.image = image
+                }
+            }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        imageAvatar.clipsToBounds = true
+        imageAvatar.layer.cornerRadius = imageAvatar.frame.size.width / 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
