@@ -141,6 +141,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		C3A5FE661FD646350091B883 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				C30F178B1FD12A7A000CD24B /* ShowImageCollectionViewController.swift */,
+				C30F17911FD12AFE000CD24B /* SelectImageCollectionViewController.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 		C3E8EBE81FC2D34B00EBAEA6 = {
 			isa = PBXGroup;
 			children = (
@@ -194,12 +203,11 @@
 		C3E8EC221FC2DD2D00EBAEA6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C3A5FE661FD646350091B883 /* Gallery */,
 				C3E8EBF61FC2D34B00EBAEA6 /* LoginViewController.swift */,
 				C3E8EC231FC2DDCC00EBAEA6 /* HomeViewController.swift */,
 				C3E8EC251FC2DDFC00EBAEA6 /* AddViewController.swift */,
 				C3FCFC831FC7F1BD005699E9 /* EditViewController.swift */,
-				C30F178B1FD12A7A000CD24B /* ShowImageCollectionViewController.swift */,
-				C30F17911FD12AFE000CD24B /* SelectImageCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
