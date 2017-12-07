@@ -58,7 +58,9 @@ class EditViewController: UIViewController {
         
         imageAvatar.isUserInteractionEnabled = true
     }
-    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        view.endEditing(true)
+    }
     /////////Function////////////
     @objc func keyboardWillHide(_ notification: Notification) {
         

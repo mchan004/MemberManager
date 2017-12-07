@@ -55,6 +55,10 @@ class AddViewController: UIViewController {
 //        imageAvatar.addGestureRecognizer(tap)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        view.endEditing(true)
+    }
+    
     @objc func chooseImage() {
         performSegue(withIdentifier: "ChooseImage", sender: nil)
     }
