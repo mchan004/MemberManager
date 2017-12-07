@@ -19,7 +19,7 @@ class AddViewController: UIViewController {
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var viewPickerView: UIView!
-    @IBOutlet weak var viewTextF: UIView!
+//    @IBOutlet weak var viewTextF: UIView!
     
     
     var select: Bool = true
@@ -50,8 +50,9 @@ class AddViewController: UIViewController {
         imageAvatar.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         imageAvatar.layer.cornerRadius = imageAvatar.frame.size.width / 2
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
-        imageAvatar.addGestureRecognizer(tap)
+        imageAvatar.isUserInteractionEnabled = true
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
+//        imageAvatar.addGestureRecognizer(tap)
     }
     
     @objc func chooseImage() {
@@ -83,9 +84,7 @@ class AddViewController: UIViewController {
     ////////////
     func setupKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        
         view.addGestureRecognizer(tap)
-        viewTextF.addGestureRecognizer(tap)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)

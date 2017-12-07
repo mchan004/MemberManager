@@ -17,7 +17,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var textAge: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var viewPickerView: UIView!
-    @IBOutlet weak var viewTextF: UIView!
+//    @IBOutlet weak var viewTextF: UIView!
     @IBOutlet weak var imageAvatar: UIImageView!
     
     var select: Bool = true
@@ -56,6 +56,7 @@ class EditViewController: UIViewController {
         imageAvatar.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         imageAvatar.layer.cornerRadius = imageAvatar.frame.size.width / 2
         
+        imageAvatar.isUserInteractionEnabled = true
     }
     
     /////////Function////////////
@@ -102,12 +103,12 @@ class EditViewController: UIViewController {
     //Keyboard//
     ////////////
     func setupKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(dismissKeyboard))
-        
-        view.addGestureRecognizer(tap)
-        viewTextF.addGestureRecognizer(tap)
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+//            target: self,
+//            action: #selector(dismissKeyboard))
+//
+//        view.addGestureRecognizer(tap)
+//        viewTextF.addGestureRecognizer(tap)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -198,8 +199,8 @@ class EditViewController: UIViewController {
             return
         }
         
-        if detail.count < 4 || detail.count > 100 {
-            self.showAlert(title: "Giới thiệu phải từ 4-100 kí tự!", message: nil)
+        if detail.count < 4 {
+            self.showAlert(title: "Giới thiệu phải tren 4 kí tự!", message: nil)
             return
         }
         

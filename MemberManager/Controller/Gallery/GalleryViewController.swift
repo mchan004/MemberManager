@@ -11,50 +11,6 @@ import Photos
 
 class GalleryViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    fileprivate var selectedPhotos = [UIImage]()
-    fileprivate let shareTextLabel = UILabel()
-    
-    var arrayImage: [UIImage] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        fetchImage()
-        fetchImage()
-        collectionView.allowsMultipleSelection = true
-        isButtonViewEnable = false
-    }
-    
-    func updateSharedPhotoCount() {
-        shareTextLabel.text = "\(selectedPhotos.count) photos selected"
-        shareTextLabel.sizeToFit()
-    }
-
-    func fetchImage() {
-        let imgManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .opportunistic
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        if fetchResult.count > 0 {
-            var aI: [UIImage] = []
-            for i in 0..<fetchResult.count {
-                imgManager.requestImage(for: fetchResult.object(at: i), targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: requestOptions, resultHandler: { (image, error) in
-                    aI.append(image!)
-                })
-            }
-            self.arrayImage = aI
-            collectionView.reloadData()
-        } else {
-            print("You got not photos!")
-        }
-    }
-    
     @IBOutlet weak var buttonSelect: UIBarButtonItem!
     @IBOutlet weak var buttonView: UIBarButtonItem!
     
@@ -91,11 +47,49 @@ class GalleryViewController: UIViewController {
         }
     }
     
+    
+    var arrayImage: [UIImage] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        fetchImage()
+        fetchImage()
+        collectionView.allowsMultipleSelection = true
+        isButtonViewEnable = false
+    }
+    
+    func fetchImage() {
+        let imgManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .opportunistic
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let fetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        if fetchResult.count > 0 {
+            var aI: [UIImage] = []
+            for i in 0..<fetchResult.count {
+                imgManager.requestImage(for: fetchResult.object(at: i), targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: requestOptions, resultHandler: { (image, error) in
+                    aI.append(image!)
+                })
+            }
+            self.arrayImage = aI
+            collectionView.reloadData()
+        } else {
+            print("You got not photos!")
+        }
+    }
+    
+    
+    
     @IBAction func handleMultiSelect(_ sender: Any) {
         isMultiSelect = !isMultiSelect
     }
     @IBAction func didSelectView(_ sender: UIBarButtonItem) {
-//        sender.tintColor = #colorLiteral(red: 0.01825479046, green: 0.4770008922, blue: 0.9854133725, alpha: 1)
+        sender.tintColor = #colorLiteral(red: 0.01825479046, green: 0.4770008922, blue: 0.9854133725, alpha: 1)
         self.performSegue(withIdentifier: "showImagesIdentifier", sender: self)
     }
     
@@ -107,9 +101,6 @@ class GalleryViewController: UIViewController {
                 for i in selectedItems {
                     vc.imageArray.append(arrayImage[i.item])
                 }
-                
-                
-                
             }
         }
     }
