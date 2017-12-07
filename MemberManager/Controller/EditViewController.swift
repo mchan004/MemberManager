@@ -86,8 +86,8 @@ class EditViewController: UIViewController {
     }
     
     @objc func changeAvatar(_ notification: Notification) {
-        if let id = notification.object as? Int {
-            imageAvatar.image = ImageStatic.arrayImage[id]
+        if let img = notification.object as? UIImage {
+            imageAvatar.image = img
         }
         
     }

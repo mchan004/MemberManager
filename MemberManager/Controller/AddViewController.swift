@@ -49,6 +49,13 @@ class AddViewController: UIViewController {
         imageAvatar.layer.borderWidth = 1
         imageAvatar.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         imageAvatar.layer.cornerRadius = imageAvatar.frame.size.width / 2
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
+        imageAvatar.addGestureRecognizer(tap)
+    }
+    
+    @objc func chooseImage() {
+        performSegue(withIdentifier: "ChooseImage", sender: nil)
     }
     
     @objc func changeAvatarFromCamera(_ notification: Notification) {
@@ -59,8 +66,8 @@ class AddViewController: UIViewController {
     }
     
     @objc func changeAvatar(_ notification: Notification) {
-        if let id = notification.object as? Int {
-            imageAvatar.image = ImageStatic.arrayImage[id]
+        if let img = notification.object as? UIImage {
+            imageAvatar.image = img
         }
         
     }
@@ -169,8 +176,8 @@ class AddViewController: UIViewController {
             return
         }
         
-        if detail.count < 4 || detail.count > 100 {
-            self.showAlert(title: "Giới thiệu phải từ 4-100 kí tự!", message: nil)
+        if detail.count < 4 {
+            self.showAlert(title: "Giới thiệu phải trên 4 kí tự!", message: nil)
             return
         }
         

@@ -14,6 +14,8 @@
 		C318FE011FC3B6510003FF39 /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318FE001FC3B6510003FF39 /* MemberTableViewCell.swift */; };
 		C318FE041FC3C42A0003FF39 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318FE031FC3C42A0003FF39 /* Member.swift */; };
 		C318FE071FC3DB220003FF39 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C318FE061FC3DB220003FF39 /* Helper.swift */; };
+		C36DA10B1FD77FB500C63DC9 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DA10A1FD77FB500C63DC9 /* GalleryViewController.swift */; };
+		C36DA12B1FD7D5B900C63DC9 /* MultiImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36DA12A1FD7D5B900C63DC9 /* MultiImageViewController.swift */; };
 		C38766BE1FD12F2800061E55 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38766BD1FD12F2800061E55 /* Image.swift */; };
 		C389BE351FC5650A0013A272 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C389BE331FC5650A0013A272 /* Database.xcdatamodeld */; };
 		C3E8EBF51FC2D34B00EBAEA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8EBF41FC2D34B00EBAEA6 /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 		C318FE001FC3B6510003FF39 /* MemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
 		C318FE031FC3C42A0003FF39 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		C318FE061FC3DB220003FF39 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C36DA10A1FD77FB500C63DC9 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		C36DA12A1FD7D5B900C63DC9 /* MultiImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImageViewController.swift; sourceTree = "<group>"; };
 		C38766BD1FD12F2800061E55 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		C389BE341FC5650A0013A272 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		C3E8EBF11FC2D34B00EBAEA6 /* MemberManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemberManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +150,8 @@
 			children = (
 				C30F178B1FD12A7A000CD24B /* ShowImageCollectionViewController.swift */,
 				C30F17911FD12AFE000CD24B /* SelectImageCollectionViewController.swift */,
+				C36DA10A1FD77FB500C63DC9 /* GalleryViewController.swift */,
+				C36DA12A1FD7D5B900C63DC9 /* MultiImageViewController.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -366,12 +372,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30F17921FD12AFE000CD24B /* SelectImageCollectionViewController.swift in Sources */,
+				C36DA10B1FD77FB500C63DC9 /* GalleryViewController.swift in Sources */,
 				C318FE011FC3B6510003FF39 /* MemberTableViewCell.swift in Sources */,
 				C318FE071FC3DB220003FF39 /* Helper.swift in Sources */,
 				C3FCFC7F1FC7BAED005699E9 /* ContainerSideMenuViewController.swift in Sources */,
 				C389BE351FC5650A0013A272 /* Database.xcdatamodeld in Sources */,
 				C30F17901FD12AD5000CD24B /* SelectImageCollectionViewCell.swift in Sources */,
 				C318FE041FC3C42A0003FF39 /* Member.swift in Sources */,
+				C36DA12B1FD7D5B900C63DC9 /* MultiImageViewController.swift in Sources */,
 				C3E8EBF71FC2D34B00EBAEA6 /* LoginViewController.swift in Sources */,
 				C3E8EBF51FC2D34B00EBAEA6 /* AppDelegate.swift in Sources */,
 				C38766BE1FD12F2800061E55 /* Image.swift in Sources */,
